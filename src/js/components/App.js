@@ -1,11 +1,11 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Test from './Test';
+import Chart from './Chart';
 
 const App = () => (
   <div>
-    <Test />
+    <Chart />
   </div>
 );
 
