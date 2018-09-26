@@ -32,14 +32,14 @@ class Chart extends Component {
   render() {
     var { data, styles } = this.state;
     return (
-      <div>
+      <React.Fragment>
         {
           data ? 
           <Plot data={data} styles={styles} />
           :
           null
         }
-      </div>
+      </React.Fragment>
     )
   }
 }
