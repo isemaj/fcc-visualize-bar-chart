@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Axis from './Axis'
+import Axis from './Axis';
 
 const XY = (props) => {
   const Xaxis = {
-    translate: `translate(0, ${props.styles.height})`,
+    translate: `translate(0, 0)`,
     scale: props.xScale,
     orient: 'Bottom',
   }
@@ -16,10 +16,10 @@ const XY = (props) => {
   }
 
   return (
-    <g className="xy">
+    <React.Fragment>
       <Axis {...Xaxis}/>
       <Axis {...Yaxis}/>
-    </g>
+    </React.Fragment>
   )
 }
 

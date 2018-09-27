@@ -11,7 +11,7 @@ class Chart extends Component {
       styles: {
         width: 950,
         height: 500,
-        padding: 60,
+        padding: 35,
       }
     }
     this.fetchData = this.fetchData.bind(this);

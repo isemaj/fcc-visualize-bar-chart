@@ -19,6 +19,7 @@ class Axis extends Component {
     let axisType = `axis${this.props.orient}`;
     const axis = d3[axisType]()
       .scale(this.props.scale)
+      .tickFormat(d3.format("d"))
     d3.select(node).call(axis);
   }
 

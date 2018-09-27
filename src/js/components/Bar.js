@@ -4,12 +4,10 @@ const createBar = (props) => {
   return (data, index) => {
     const rectProps = {
       key: data,
-      // height: props.yScale(data[1]),                       // done
-      // y: props.styles.height - props.yScale(data[1]),      // done 
-      height: (props.styles.height - props.styles.padding) - props.yScale(data[1]),                       // done
-      y: props.yScale(data[1]) + props.styles.padding,      // done 
+      height: props.yScale(data[1]),                       // done
       width: props.styles.width / props.data.length,       // done
-      x: props.xScale(index),
+      x: index * (props.styles.width / props.data.length) ,
+      y: props.styles.height - props.yScale(data[1]),      // done 
       fill: props.colorRange(index), 
     };
     return <rect {...rectProps} />;
