@@ -15,8 +15,11 @@ class Axis extends Component {
   }
 
   createAxis() {
-    var node = this.refs.axis;
-    d3.select(node).call(d3.axisBottom().ticks(5));
+    let node = this.refs.axis;
+    let axisType = `axis${this.props.orient}`;
+    const axis = d3[axisType]()
+      .scale(this.props.scale)
+    d3.select(node).call(axis);
   }
 
   render() {
@@ -25,11 +28,5 @@ class Axis extends Component {
     )
   }
 }
-
-// const Axis = (props) => {
-//   return (
-//     <g transform={props.translate}></g>
-//   )
-// }
 
 export default Axis;
