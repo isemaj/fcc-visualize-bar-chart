@@ -11,7 +11,15 @@
   "author": "James Itum",
   "license": "MIT",
   "dependencies": {
+<<<<<<< HEAD
     "d3": "^5.7.0"
+=======
+    "d3": "^5.7.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-hot-loader": "^4.3.11"
+>>>>>>> 3118dc1
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
