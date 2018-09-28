@@ -24,7 +24,7 @@ const yScale = (props) => {
 const colorRange = (props) => {
   return d3.scaleLinear()
     .domain([0, props.data.length])
-    .range(["#008B74", "#845EC2"])
+    .range(["#FFD12C", "#04AC8F"])
 }
 
 const aggregator = (props) => {
