@@ -43,6 +43,21 @@ svg {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+
+.tooltip {
+  width: 80px;
+  height: 80px;
+  background-color: red;
+  display: block;
+  opacity: 0,
+}
+
 .data-bar:hover {
   fill: white;
 }
+
+
+
+// .tooltip:hover {
+//   opacity: 1;
+// }
