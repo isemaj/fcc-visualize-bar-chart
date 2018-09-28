@@ -9,9 +9,9 @@ class Chart extends Component {
       raw: [], 
       data: [], 
       styles: {
-        width: 950,
-        height: 500,
-        padding: 35,
+        width: 910,
+        height: 460,
+        padding: 45,
       }
     }
     this.fetchData = this.fetchData.bind(this);

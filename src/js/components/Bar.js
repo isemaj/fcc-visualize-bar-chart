@@ -4,10 +4,10 @@ const createBar = (props) => {
   return (data, index) => {
     const rectProps = {
       key: data,
-      height: props.yScale(data[1]),                       // done
-      width: props.styles.width / props.data.length,       // done
-      x: index * (props.styles.width / props.data.length) ,
-      y: props.styles.height - props.yScale(data[1]),      // done 
+      height: (props.styles.height - props.styles.padding)  - props.yScale(data[1]),
+      width: (props.styles.width - (props.styles.padding * 2)) / props.data.length,
+      x: index * ((props.styles.width - (props.styles.padding * 2)) / props.data.length),
+      y: (props.styles.height - props.styles.padding) - ((props.styles.height - props.styles.padding) - props.yScale(data[1])),
       fill: props.colorRange(index), 
     };
     return <rect {...rectProps} />;
@@ -16,9 +16,9 @@ const createBar = (props) => {
 
 const Bar = (props) => {
   return (
-    <React.Fragment>
+    <g transform="translate(45, 0)">
       {props.data.map(createBar(props))}
-    </React.Fragment>
+    </g>
   )
 }
 
