@@ -32,8 +32,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const years = data.data.map((data) => data[0].substring(0,4))
       const GDP = data.data.map((data) => data[1])
 
+
       const minGDP = d3.min(GDP);
       const maxGDP = d3.max(GDP);
+
+      let quarter = (receive) => {
+        let dataquarter = data.data[receive][0].substring(5,7)       
+        if (dataquarter === '01') {
+          return 'Q1'
+        }
+        else if (dataquarter === '04') {
+          return 'Q2'
+        }
+        else if (dataquarter === '07') {
+          return 'Q3'
+        }
+        else if (dataquarter === '10') {
+          return 'Q4'
+        }
+      }
 
       let xScale = d3.scaleLinear()
         .domain([d3.min(years), d3.max(years)])
@@ -53,6 +70,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
       let barScale = d3.scaleLinear()
         .domain([minGDP, maxGDP])
         .range([(minGDP / maxGDP) * actualHeight, actualHeight])
+
+      let colorRange = d3.scaleLinear()
+        .domain([0, GDP.length])
+        .range(['#FFC688', '#A57EFF'])
 
       let scaledGDP = GDP.map((d) => barScale(d));
 
@@ -78,12 +99,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         .attr('y', (d, i) => (actualHeight - d) + (padding))
         .attr('width', barWidth)
         .attr('height', (d,i) => d)
-        .style('fill', 'red')
+        .style('fill', (d,i) => colorRange(i))
         .on('mouseover', (d, i) => {
+          const quarterYear = quarter(i);
           tooltip.transition()
             .duration(0)
             .style('opacity', .8)
-          tooltip.html(`$ ${GDP[i]} Billion <br> ${years[i]}`)
+          tooltip.html(`${quarterYear} $ ${GDP[i]} Billion <br> ${years[i]}`)
             .style('opacity', 1)
             .style('height', 80)
             .style('width', 150)
