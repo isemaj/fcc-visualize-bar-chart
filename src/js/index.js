@@ -4,15 +4,97 @@ import '../styles/app.scss';
 
 const api = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json";
 
-let svg = d3.select('#chart')
+const width = 990;
+const height = 540;
+const padding = 65;
+
+const svg = d3.select('#chart')
   .append('svg')
-  .attr('width', 500)
-  .attr('height', 900);
+  .attr('width', width)
+  .attr('height', height)
+
+const tooltip = d3.select('#chart')
+  .append('div')
+  .attr('id', 'tooltip')
+  .style('opacity', .8)
+
 
 document.addEventListener("DOMContentLoaded", (event) => {
   fetch(api)
     .then(res => res.json())
     .then(data => {
+
+      const actualWidth = +svg.attr('width') - (padding * 2);
+      const actualHeight = +svg.attr('height') - (padding * 2);
+      const barWidth = actualWidth / data.data.length;
+
+      const years = data.data.map((data) => data[0].substring(0,4))
+      const GDP = data.data.map((data) => data[1])
+
+      const minGDP = d3.min(GDP);
+      const maxGDP = d3.max(GDP);
+
+      let xScale = d3.scaleLinear()
+        .domain([d3.min(years), d3.max(years)])
+        .range([0, actualWidth])
+
+      let yScale = d3.scaleLinear()
+        .domain([minGDP, maxGDP])
+        .range([`${height-padding}`, `${(minGDP/maxGDP) * height + padding}`])
+
+      let xAxis = d3.axisBottom()
+        .scale(xScale)
+        .tickFormat(d3.format('d'));
+
+      let yAxis = d3.axisLeft()
+        .scale(yScale)
+
+      let barScale = d3.scaleLinear()
+        .domain([minGDP, maxGDP])
+        .range([(minGDP / maxGDP) * actualHeight, actualHeight])
+
+      let scaledGDP = GDP.map((d) => barScale(d));
+
+      svg.append('g')
+        .call(xAxis)
+        .attr('id', 'x-axis')
+        .attr('transform', `translate(${padding}, ${height - padding})`)
+
+      svg.append('g')
+        .call(yAxis)
+        .attr('id', 'y-axis')
+        .attr('transform', `translate(${padding}, 0)`)
+
+
+      d3.select('svg').selectAll('rect')
+        .data(scaledGDP)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('data-date', (d, i) => d[0])
+        .attr('data-gdp', (d, i) => d[1])
+        .attr('x', (d, i) => i * barWidth + padding)
+        .attr('y', (d, i) => (actualHeight - d) + (padding))
+        .attr('width', barWidth)
+        .attr('height', (d,i) => d)
+        .style('fill', 'red')
+        .on('mouseover', (d, i) => {
+          tooltip.transition()
+            .duration(0)
+            .style('opacity', .8)
+          tooltip.html(`$ ${GDP[i]} Billion <br> ${years[i]}`)
+            .style('opacity', 1)
+            .style('height', 80)
+            .style('width', 150)
+            .style('top', actualHeight - 10)
+            .style('left', (i * barWidth + (padding * 2)) + 100 )
+            .style('color', 'white')
+        })
+        .on('mouseout', (d) => {
+          tooltip.transition()
+            .duration(0)
+            .style('opacity', 0)
+        })
 
     })
 });
