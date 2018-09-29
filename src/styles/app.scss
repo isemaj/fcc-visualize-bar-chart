@@ -4,6 +4,19 @@ body{
   display: grid;
 }
 
+.bar:hover {
+  fill: white !important;
+}
+
+#tooltip {
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  border-radius: 4px;
+}
 // .plot{
 //   position: absolute;
 //   top: 50%;
@@ -43,21 +56,7 @@ svg {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-
-.tooltip {
-  width: 80px;
-  height: 80px;
-  background-color: red;
-  display: block;
-  opacity: 0,
+#chart {
+  width: 990px;
+  height: 540px;
 }
-
-.data-bar:hover {
-  fill: white;
-}
-
-
-
-// .tooltip:hover {
-//   opacity: 1;
-// }
