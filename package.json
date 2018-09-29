@@ -11,16 +11,11 @@
   "author": "James Itum",
   "license": "MIT",
   "dependencies": {
-    "d3": "^5.7.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-hot-loader": "^4.3.11"
+    "d3": "^5.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
