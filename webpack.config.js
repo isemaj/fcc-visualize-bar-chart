@@ -8,50 +8,39 @@ module.exports = {
   target: 'web',
   entry: './src/js/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
-  },
-  devServer: {
-    port: 9000,
-    hot: true,
-    hotOnly: true,
   },
   module: {
     rules: [
       {
         test: /\.pug$/,
-        use: [
-          {
-            loader: 'pug-loader',
-          },
-        ],
+        loader: 'pug-loader',
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
-      title: 'Template',
+      title: 'Bar Chart',
       hash: true,
       template: './src/index.pug',
     }),
-    new webpack.HotModuleReplacementPlugin({
-      multiStep: true,
-    }),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].js.map',
-    }),
   ],
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+    minimize: true,
   },
 };
